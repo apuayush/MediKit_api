@@ -9,6 +9,7 @@ class LoginHandler(RequestHandler):
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
 
+    @coroutine
     def post(self):
 
         data = json.loads(self.request.body.decode('utf-8'))
@@ -79,3 +80,4 @@ class LogoutHandler(RequestHandler):
 
     def options(self):
         self.set_status(204)
+
