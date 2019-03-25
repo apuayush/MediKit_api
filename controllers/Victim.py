@@ -15,7 +15,7 @@ class VictimInfo(RequestHandler):
         ti = t.strftime("%d-%m-%Y %I:%M %p")
         data['time'] = ti
         # post on dashboard
-        db.collection('session').document(str(now) + data['name']).set(data)
+        db.collection('patient_data').document(str(now) + data['name']).set(data)
         # TODO - get similar description
         with open("controllers/secrets/descriptions.json") as f:
             desc_list = json.load(f)
