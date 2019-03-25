@@ -29,7 +29,7 @@ except:
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-
+current_id = 1
 # Use the application default credentials
 cred = credentials.Certificate("controllers/secrets/firebase_secret.json")
 firebase_admin.initialize_app(cred)
