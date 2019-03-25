@@ -11,6 +11,9 @@ class VictimInfo(RequestHandler):
     def post(self):
         data = json.loads(self.request.body.decode('utf-8'))
         now = int(time.time())
+        t = datetime.now()
+        time = t.strftime("%d-%m-%Y %I:%M %p")
+        data['time'] = time
         # post on dashboard
         db.collection('session').document(str(now) + data['name']).set(data)
         # TODO - get similar description
