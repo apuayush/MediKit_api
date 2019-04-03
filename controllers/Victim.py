@@ -11,14 +11,13 @@ class VictimInfo(RequestHandler):
     @coroutine
     def post(self):
         data = json.loads(self.request.body.decode('utf-8'))
-        global current_id
         now = int(time.time())
-        data['id'] =  current_id
-        current_id += 1
         t = datetime.now()
         ti = t.strftime("%d-%m-%Y %I:%M %p")
         data['time'] = ti
         data['doc_response'] = ""
+        current_id = str(now) + data['name']
+        data['id'] = current_id
         # post on dashboard
         db.collection('patient_data').document(str(now) + data['name']).set(data)
         # TODO - get similar description
@@ -36,7 +35,7 @@ class VictimInfo(RequestHandler):
             doc = list(doc)[0].to_dict()
             cases.append(doc)
         self.write(json.dumps({"status": 200,
-                               "id": current_id-1,
+                               "id": current_id,
                                "message":"successful",
                                "relevant_responses": relevant_responses,
                                "cases": cases}))
